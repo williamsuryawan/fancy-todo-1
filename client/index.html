@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="google-signin-client_id"
-        content="646570670519-k3cqtest590qi5tc1kuiq11msf1v9ilg.apps.googleusercontent.com">
+        content="351773557771-oca184lbekrl7tg8cir43n6upn0t06s9.apps.googleusercontent.com">
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -67,6 +67,7 @@
                     <div class="row" id="myproject-todo"></div>
                 </div>
             </div>
+        </div>
     </div>
     
     <div class="container-12" id="login-content">
@@ -133,7 +134,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-primary" onclick="addTodoFunction()">Add</button>
+              <button type="button" class="btn btn-primary" onclick="addTodoFunction()" data-dismiss="modal">Add</button>
             </div>
           </div>
         </div>
@@ -198,7 +199,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-primary" onclick="addProjectFunction()">Add</button>
+              <button type="button" class="btn btn-primary" onclick="addProjectFunction()" data-dismiss="modal">Add</button>
             </div>
           </div>
         </div>
@@ -229,7 +230,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-primary" onclick="addTodoProjectFunction()">Add</button>
+              <button type="button" class="btn btn-primary" onclick="addTodoProjectFunction()" data-dismiss="modal">Add</button>
             </div>
           </div>
         </div>
@@ -289,7 +290,8 @@
                     <textarea class="form-control" id="addMemberModalInvitedMember" rows="4" readonly="readonly"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="addMemberModalNewInvitedMember" class="col-form-label">Add More Member:</label>
+                    <label for="addMemberModalNewInvitedMember" class="col-form-label">Add More Member <br> 
+                    Please type registered email here; <br> For multiple email invitation, please use space among the email; <br>The unregistered email on this system will not be added </label>
                     <textarea class="form-control" id="addMemberModalNewInvitedMember"></textarea>
                 </div>
                 </form>

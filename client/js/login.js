@@ -57,12 +57,14 @@ function login() {
         $('#login-content').hide();
         $('#navbar-content-before').hide();
         $('#navbar-content-after').show();
-        $('#main-content').show();
-        $('#mysummary-content').show();
         $('#myproject-content').hide();
         $('#mytodo-content').hide();
         getmytodo();
-        getmyproject();
+        getmycreatedproject();
+        getmyinvitedproject();
+        getmyactiveproject();
+        $('#mysummary-content').show();
+        $('#main-content').show();
     })
     .fail(err => {
         console.log(err)
@@ -102,6 +104,12 @@ function signOut() {
             $('#home-content').show();
             $('#navbar-content-before').show();
             $('#navbar-content-after').hide();
+            $('#mysummary-welcome').empty();
+            $('#mysummary-todo-complete').empty();
+            $('#mysummary-todo').empty();
+            $('#mysummary-project-active').empty();
+            $('#mysummary-project-invited').empty();
+            $('#mysummary-project-created').empty();
         }
       })
     

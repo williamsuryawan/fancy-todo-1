@@ -44,13 +44,13 @@ function getmyactiveproject() {
         myActiveProjects.forEach(myActiveProject => {
         summary_active += `
                 <div class="col-6 mb-3" >
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-body bg-warning text-black">
+                    <div class="card bg-primary" style="width: 18rem;">
+                        <div class="card-body text-white">
                             <h5 class="card-title">${myActiveProject.projectName}</h5>
                             <p class="card-text"> <strong>Description:</strong> ${myActiveProject.description} </p>
                             <p class="card-text"> <strong>Active Members:</strong> ${myActiveProject.activeMembers.length} </p>
-                            <button type="button" class="btn btn-success" onclick="addTodoProjectModalFunction('${myActiveProject._id}')" style="color:white">Add Member</button>
                             <button type="button" class="btn btn-dark" onclick="seeDetailProjectFunction('${myActiveProject._id}')" style="color:white">Detail</button>
+                            <button type="button" class="btn btn-danger" onclick="leaveProjectFunction('${myActiveProject._id}')" style="color:white">Leave Project</button>
                         </div>
                     </div>
                 </div>`
@@ -79,7 +79,7 @@ function getmyinvitedproject () {
         myInvitedProjects.forEach(myInvitedProject => {
         summary_invited += `
                 <div class="col-6 mb-3" >
-                    <div class="card" style="width: 18rem;">
+                    <div class="card border-warning" style="width: 18rem;">
                         <div class="card-body bg-warning text-black">
                             <h5 class="card-title">${myInvitedProject.projectName}</h5>
                             <p class="card-text"> <strong>Active Members:</strong> ${myInvitedProject.activeMembers.length} </p>
@@ -425,7 +425,7 @@ function acceptProjectFunction(inputProjectId) {
 function declineProjectFunction (inputProjectId) {
     console.log("masuk ke function decline invitation", inputProjectId)
     Swal.fire({
-        title: 'Do you want to decline?',
+        title: 'Do you want to decline to join the project?',
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -458,5 +458,43 @@ function declineProjectFunction (inputProjectId) {
             })
         }
       })
-    }
+}
+
+function leaveProjectFunction (inputProjectId) {
+    console.log("masuk ke function leave invitation", inputProjectId)
+    Swal.fire({
+        title: 'Do you want to leave the project?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Leave'
+      }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url: `${baseURL}/projects/leave/${inputProjectId}`,
+                method: 'PATCH',
+                headers: {token: `${baseToken}`}
+            })
+            .done(data => {
+                console.log("leave project berhasil", data)
+                Swal.fire({
+                    position: 'top-end',
+                    type: 'success',
+                    title: `Success! You have left the project`,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                getmytodo();
+                getmycreatedproject();
+                getmyinvitedproject();
+                getmyactiveproject();
+                $('#mysummary-content').show();
+            })
+            .fail(error => {
+                console.log(error)
+            })
+        }
+      })
+}
     

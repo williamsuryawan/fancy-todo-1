@@ -2,7 +2,7 @@ $(document).ready(function() {
     $('#login-content').hide();
     $('#home-content').show();
 
-    if(localStorage.getItem('token')){
+    if(localStorage.getItem('token')) {
         isLogin(true);
     } else {
         isLogin(false);
@@ -51,20 +51,6 @@ $(document).ready(function() {
         $('#mytodo-content').hide();
     })
 
-    $('#myproject_click').click(function() {
-        console.log("show my project")
-        $('#summary-content').hide();
-        $('#myproject-content').show();
-        $('#mytodo-content').hide();
-    })
-
-    $('#mytodo_click').click(function() {
-        console.log("show my todo")
-        $('#summary-content').hide();
-        $('#myproject-content').hide();
-        $('#mytodo-content').show();
-    })
-
 })
 
 function register() {
@@ -102,9 +88,16 @@ function isLogin(input) {
         $('#navbar-content-before').show();
         $('#navbar-content-after').hide();
     } else {
-        console.log("login is ===>", input)
-        $('#main-content').show();
+        $('#login-content').hide();
         $('#navbar-content-before').hide();
         $('#navbar-content-after').show();
+        $('#myproject-content').hide();
+        $('#mytodo-content').hide();
+        getmytodo();
+        getmycreatedproject();
+        getmyinvitedproject();
+        getmyactiveproject();
+        $('#mysummary-content').show();
+        $('#main-content').show();
     }
 }

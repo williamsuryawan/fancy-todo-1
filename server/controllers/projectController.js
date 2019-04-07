@@ -52,11 +52,6 @@ class ProjectController {
             })
             memberInvited = users.filter(e => e !== null)
             console.log("new array in new member invited", memberInvited)
-            // memberInvited.forEach(usr => {
-            //     let idx = req.body.memberEmails.split(' ').findIndex(e => e == usr.email)
-            //     console.log("dalam looping member invited", usr, idx)
-            //     req.body.memberEmails = req.body.memberEmails.split(' ').splice(idx, 1).join(' ')
-            // })
             memberInvited = memberInvited.map(e => e._id)
             console.log("after removing all information: ", memberInvited)
             return Project
@@ -115,8 +110,19 @@ class ProjectController {
             })
     }
     
-    static removeMember (req,res) {
-
+    static leaveProject (req,res) {
+        console.log("masuk ke leave project", req.params.id)
+        Project
+            .findOneAndUpdate({
+                _id: req.params.id
+            }, {$pull: {activeMembers: req.loggedInUser.id}}, { new: true })
+            .then(afterLeaving => {
+                res.status(200).json(afterLeaving)
+            })
+            .catch(err => {
+                console.log(err)
+                res.status(500).json(err.message)
+            })
     }
 
     static createTodoinProject (req,res) {
